@@ -1,21 +1,20 @@
-package utn.isi.tp.demo_tp_deso.modelo;
+package grupo1noche.tpspring.model;
 
 import lombok.*;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "pago")
 
-public class Pago {
+@Table(name = "pago")
+@MappedSuperclass
+
+public abstract class Pago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPago;
-    @Column(name = "tipoPago")
-    private String nombrePago;
 
+
+    public abstract void pagar(int total);
 }
