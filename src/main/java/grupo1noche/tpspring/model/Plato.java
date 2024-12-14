@@ -17,7 +17,7 @@ public class Plato extends ItemMenu {
     @Column(name = "esVegano")
     private boolean esVegano;
 
-    public Plato(int id,String nombre,int precio,Categoria categoria,Vendedor vendedor, double peso, boolean esVegano) {
+    public Plato(Long id,String nombre,int precio,Categoria categoria,Vendedor vendedor, double peso, boolean esVegano) {
         super(id,nombre,precio,categoria,vendedor);
         this.peso = peso;
         this.esVegano = esVegano;

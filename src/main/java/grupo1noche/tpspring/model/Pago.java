@@ -7,7 +7,8 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 
 @Table(name = "pago")
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_pago", discriminatorType = DiscriminatorType.STRING)
 
 public abstract class Pago {
 
