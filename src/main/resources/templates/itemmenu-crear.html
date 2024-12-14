@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Registrar ItemMenu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto py-10">
+      <h1 class="text-2xl font-bold mb-4">Registrar ItemMenu</h1>
+      <form action="/itemmenu/registrar" method="post">
+        <div class="mb-4">
+          <label for="nombre" class="block text-sm font-medium"
+            >Nombre Item:</label
+          >
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            class="border rounded w-full py-2 px-3"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="precio" class="block text-sm font-medium">Precio:</label>
+          <input
+            type="number"
+            id="precio"
+            name="precio"
+            class="border rounded w-full py-2 px-3"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="categoria" class="block text-sm font-medium"
+            >Categoria:</label
+          >
+          <input
+            type="text"
+            id="categoria"
+            name="categoria"
+            class="border rounded w-full py-2 px-3"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          Registrar
+        </button>
+      </form>
+      <div class="mt-6">
+        <a href="/" class="text-blue-500 hover:underline"
+          >Volver al menú principal</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
