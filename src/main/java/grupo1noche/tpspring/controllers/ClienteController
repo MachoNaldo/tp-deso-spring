@@ -1,0 +1,58 @@
+package grupo1.tp.controller;
+
+import grupo1.tp.models.Cliente;
+import grupo1.tp.services.ClienteService;
+import grupo1.tp.exceptions.ClavesForaneasException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/clientes")
+public class ClienteController {
+
+    @Autowired
+    private ClienteService clienteService;
+
+    @GetMapping
+    public ResponseEntity<List<Cliente>> listarClientes() {
+        List<Cliente> clientes = clienteService.listarClientes();
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> buscarCliente(@PathVariable int id) {
+        Cliente cliente = clienteService.buscarCliente(id);
+        if (cliente != null) {
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> crearCliente(@RequestBody Cliente cliente) {
+        clienteService.crearCliente(cliente);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> actualizarCliente(@PathVariable int id, @RequestBody Cliente cliente) {
+        cliente.setId(id);
+        clienteService.actualizarCliente(cliente);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarCliente(@PathVariable int id) {
+        try {
+            clienteService.eliminarCliente(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (ClavesForaneasException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+}
