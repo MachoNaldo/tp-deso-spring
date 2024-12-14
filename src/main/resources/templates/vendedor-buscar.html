@@ -4,12 +4,12 @@
     <title>Buscar Vendedor</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100 text-gray-800">
+  <body class="dark:bg-gray-800 text-gray-100 font-mono">
     <div class="container mx-auto py-10">
       <h1 class="text-2xl font-bold mb-4">Buscar Vendedor</h1>
       <form action="/vendedor/buscar" method="get" class="flex space-x-4">
         <!-- Campo select para elegir el criterio de búsqueda -->
-        <select name="criterio" class="border rounded py-2 px-3">
+        <select name="criterio" class="text-gray-800 border rounded py-2 px-3">
           <option value="nombre">Nombre</option>
           <option value="telefono">Teléfono</option>
         </select>
@@ -19,7 +19,7 @@
           type="text"
           name="busqueda"
           placeholder="Buscar por nombre o teléfono"
-          class="border rounded w-full py-2 px-3"
+          class="text-gray-800 border rounded w-full py-2 px-3"
           required
         />
 
@@ -44,10 +44,14 @@
         </ul>
       </div>
 
-      <!-- Si no hay resultados -->
-      <div th:if="${#lists.isEmpty(vendedores)}" class="mt-6">
+      <!-- Mensaje si no hay resultados -->
+      <div
+        th:if="${#lists.isEmpty(vendedores)} and ${criterio != null}"
+        class="mt-6"
+      >
         <p>No se encontraron vendedores que coincidan con la búsqueda.</p>
       </div>
+
       <div class="mt-6">
         <a href="/" class="text-blue-500 hover:underline"
           >Volver al menú principal</a
