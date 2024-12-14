@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 
+@Entity
 @Table(name = "plato")
 
 public class Plato extends ItemMenu {

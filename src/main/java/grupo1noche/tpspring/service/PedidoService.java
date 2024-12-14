@@ -40,8 +40,4 @@ public class PedidoService {
         return repoPedido.findById(id).orElseThrow(() -> new RuntimeException("pedido no encontrado"));
     }
 
-    public Iterable<Pedido> buscarPorNombre(String nombre) {
-        return repoPedido.findByNombreContainingIgnoreCase(nombre);
-    }
-
 }

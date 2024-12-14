@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 
-
+@Entity
 @Table(name = "bebida")
 
 public class Bebida extends ItemMenu {

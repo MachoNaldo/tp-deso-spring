@@ -17,17 +17,17 @@ public class PlatoService {
         repoItemMenu.save(p);
         return;
     }
-    public void modificarPlato(Plato b) {
-        Plato platoExistente = (Plato) repoItemMenu.findById(p.getIdMenu())
+    public void modificarPlato(Plato p) {
+        Plato platoExistente = (Plato) repoItemMenu.findById(p.getIdItem())
             .orElseThrow(() -> new RuntimeException("Plato no encontrado"));
             
-        platoExistente.setCategoria(b.getCategoria());
-        platoExistente.setEsConAlcohol(b.isEsConAlcohol());
-        platoExistente.setEsGaseosa(b.isEsGaseosa());
-        platoExistente.setNombreItem(b.getNombreItem());
-        platoExistente.setVendedor(b.getVendedor());
-        platoExistente.setPrecio(b.getPrecio());
-        platoExistente.setVolumenEnMl(b.getVolumenEnMl());
+        platoExistente.setCategoria(p.getCategoria());
+        platoExistente.setNombreItem(p.getNombreItem());
+        platoExistente.setVendedor(p.getVendedor());
+        platoExistente.setPrecio(p.getPrecio());
+        platoExistente.setEsVegano(p.isEsVegano());
+        platoExistente.setPeso(p.getPeso());
+
         repoItemMenu.save(platoExistente);
         return;
     }

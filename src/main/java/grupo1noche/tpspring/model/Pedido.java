@@ -6,21 +6,32 @@ import jakarta.persistence.*;
 @Data
 @AllArgsConstructor
 
+@Entity
 @Table(name = "pedido")
 
 public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPedido;
-    @Column(name = "cliente")
+    private long idPedido;
+
+    @OneToOne
+    @JoinColumn(name = "cliente_id", referencedColumnName = "idCliente")
     private Cliente cliente;
-    @Column(name = "pago")
+
+    @OneToOne
+    @JoinColumn(name = "pago_id", referencedColumnName = "id_pago")
     private Pago pago;
-    @Column(name = "estado")
+    
+    @Enumerated(EnumType.STRING)
     private Estado estado;
+
     @Column(name = "total")
     private Integer total;
 
 
+}
+private enum Estado {
+    PENDIENTE,
+    EN_ENVIO,
 }

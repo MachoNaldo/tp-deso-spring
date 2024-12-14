@@ -2,7 +2,6 @@ package grupo1noche.tpspring.model;
 
 import jakarta.persistence.*;
 
-@Entity
 @DiscriminatorValue("MERCADOPAGO")
 
 public class PagoMercadoPago extends Pago{

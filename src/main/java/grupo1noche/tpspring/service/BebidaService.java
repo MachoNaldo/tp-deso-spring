@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import grupo1noche.tpspring.model.Bebida;
-import grupo1noche.tpspring.model.Cliente;
+
 import grupo1noche.tpspring.repository.ItemMenuRepository;
 
 @Service
@@ -17,8 +17,8 @@ public class BebidaService {
         repoItemMenu.save(b);
         return;
     }
-    public void modificarCliente(Bebida b) {
-        Bebida bebidaExistente = (Bebida) repoItemMenu.findById(b.getIdMenu())
+    public void modificarBebida(Bebida b) {
+        Bebida bebidaExistente = (Bebida) repoItemMenu.findById(b.getIdItem())
             .orElseThrow(() -> new RuntimeException("Bebida no encontrada"));
             
         bebidaExistente.setCategoria(b.getCategoria());
@@ -29,6 +29,6 @@ public class BebidaService {
         bebidaExistente.setPrecio(b.getPrecio());
         bebidaExistente.setVolumenEnMl(b.getVolumenEnMl());
         repoItemMenu.save(bebidaExistente);
-         return;
+        return;
     }
 }

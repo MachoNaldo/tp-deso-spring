@@ -7,5 +7,5 @@ import grupo1noche.tpspring.model.Cliente;
 
 @Repository
 public interface ClienteRepository extends CrudRepository<Cliente, Long>{
-    Iterable<Cliente> findByNombre(String nombre);
+    Iterable<Cliente> findByNombreContainingIgnoreCase(String nombre);
 }

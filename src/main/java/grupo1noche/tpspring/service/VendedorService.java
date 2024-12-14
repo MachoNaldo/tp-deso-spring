@@ -24,7 +24,7 @@ public class VendedorService {
             .orElseThrow(() -> new RuntimeException("vendedor no encontrado"));
         
         vendedorExistente.setDireccionVendedor(vendedor.getDireccionVendedor());
-        vendedorExistente.setListaItemMenus(vendedor.getListaItemMenus());
+        vendedorExistente.setNombre(vendedor.getNombre());
         repoVendedor.save(vendedorExistente);
         return;
     }
