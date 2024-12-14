@@ -1,14 +1,12 @@
-package utn.isi.tp.demo_tp_deso.modelo;
+package grupo1noche.tpspring.model;
 
 import lombok.*;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Entity(name = "pedido")
+
+@Table(name = "pedido")
 
 public class Pedido {
 

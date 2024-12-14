@@ -1,16 +1,16 @@
-package utn.isi.tp.demo_tp_deso.modelo;
+package grupo1noche.tpspring.model;
 
 import lombok.*;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
+@MappedSuperclass
 @Entity(name = "itemMenu")
 
-public class ItemMenu {
+public abstract class ItemMenu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,21 @@ public class ItemMenu {
     @Column(name = "categoria")
     private Categoria categoria;
     @Column(name = "vendedor")
-    private Vendedor direccion;
+    private Vendedor vendedor;
 
+    public abstract double peso();
+    
+    public abstract double getPeso();
+
+    public abstract boolean esComida();
+
+    public abstract boolean esBebida();
+    
+    public abstract boolean tieneAlcohol();
+    
+    public abstract boolean esGaseosa();
+
+    public abstract boolean aptoVegano();
+    
 
 }

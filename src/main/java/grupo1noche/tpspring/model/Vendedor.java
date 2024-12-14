@@ -1,15 +1,13 @@
-package utn.isi.tp.demo_tp_deso.modelo;
+package grupo1noche.tpspring.model;
 
 import lombok.*;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Entity(name = "vendedor")
+@Table(name = "vendedor")
 
 public class Vendedor {
 
@@ -25,6 +23,6 @@ public class Vendedor {
     @Column(name = "vendedor")
     private Vendedor direccion;
     @OneToMany(mappedBy = "listaItems", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemMenu> tareas;
+    private List<ItemMenu> listaItemMenus;
 
 }
