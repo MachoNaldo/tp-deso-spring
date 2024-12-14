@@ -5,19 +5,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="dark:bg-gray-800 text-gray-800">
-    <div class="mx-auto py-10">
-        <h1 class="text-3xl font-bold mb-8 text-center dark:bg-gray-800 text-white">Bienvenido</h1>
-        <div class="grid grid-cols-2 gap-4">
-            <a href="/cliente/crear" class="bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600">Registrar Cliente</a>
-            <a href="/cliente/buscar" class="bg-green-500 text-white py-2 px-4 rounded text-center hover:bg-green-600">Buscar Cliente</a>
-            <a href="/vendedor/crear" class="bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600">Registrar Vendedor</a>
-            <a href="/vendedor/buscar" class="bg-green-500 text-white py-2 px-4 rounded text-center hover:bg-green-600">Buscar Vendedor</a>
-            <a href="/pedido/crear" class="bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600">Registrar Pedido</a>
-            <a href="/pedido/buscar" class="bg-green-500 text-white py-2 px-4 rounded text-center hover:bg-green-600">Buscar Pedido</a>
-            <a href="/itemmenu/crear" class="bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600">Registrar ItemMenu</a>
-            <a href="/itemmenu/buscar" class="bg-green-500 text-white py-2 px-4 rounded text-center hover:bg-green-600">Buscar ItemMenu</a>
-            <a href="/pago/crear" class="bg-blue-500 text-white py-2 px-4 rounded text-center hover:bg-blue-600">Registrar Pago</a>
-            <a href="/pago/buscar" class="bg-green-500 text-white py-2 px-4 rounded text-center hover:bg-green-600">Buscar Pago</a>
+    <div class="mx-auto py-10 max-w-md">
+        <!-- max-w-md limita el contenedor a un ancho máximo para no extenderse demasiado -->
+        <h1 class="text-3xl font-mono mb-8 text-center dark:bg-gray-800 text-white">Bienvenido</h1>
+        <div class="flex flex-col justify-center items-center space-y-10">
+            <!-- Botones de ancho completo con w-full -->
+            <a href="/cliente/buscar" class="bg-green-500 text-white py-4 px-8 rounded text-center text-lg font-mono w-full hover:bg-green-600">Buscar Cliente</a>
+            <a href="/vendedor/buscar" class="bg-green-500 text-white py-4 px-8 rounded text-center text-lg font-mono w-full hover:bg-green-600">Buscar Vendedor</a>
+            <a href="/pedido/buscar" class="bg-green-500 text-white py-4 px-8 rounded text-center text-lg font-mono w-full hover:bg-green-600">Buscar Pedido</a>
+            <a href="/itemmenu/buscar" class="bg-green-500 text-white py-4 px-8 rounded text-center text-lg font-mono w-full hover:bg-green-600">Buscar ItemMenu</a>
+            <a href="/pago/buscar" class="bg-green-500 text-white py-4 px-8 rounded text-center text-lg font-mono w-full hover:bg-green-600">Buscar Pago</a>
         </div>
     </div>
 </body>
