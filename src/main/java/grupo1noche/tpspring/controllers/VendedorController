@@ -1,0 +1,70 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class VendendorController {
+
+    private final VendendorService vendendorService;
+
+    @Autowired
+    public VendendorController(VendendorService vendendorService) {
+        this.vendendorService = vendendorService;
+    }
+
+    @GetMapping("/vendedores")
+    public String listarVendedores(Model model) {
+        model.addAttribute("vendedores", vendendorService.listarVendedores());
+        return "vendedores-lista";
+    }
+
+    @GetMapping("/vendedor/crear")
+    public String crearVendedorForm(Model model) {
+        model.addAttribute("vendedor", new Vendedor());
+        return "vendedor-crear"; 
+    }
+
+    @PostMapping("/vendedor/registrar")
+    public String registrarVendedor(Vendedor vendedor) {
+        vendendorService.crearVendedor(vendedor);
+        return "redirect:/vendedores";
+    }
+
+    @GetMapping("/vendedor/modificar")
+    public String mostrarFormularioDeModificacion(@RequestParam("id") Integer id, Model model) {
+        Vendedor vendedor = vendendorService.buscarVendedorPorId(id);
+        model.addAttribute("vendedor", vendedor);
+        return vendedor != null ? "vendedor-modificar" : "redirect:/vendedores"; 
+    }
+
+    @PostMapping("/vendedor/modificar")
+    public String modificarVendedor(Vendedor vendedor) {
+        vendendorService.actualizarVendedor(vendedor);
+        return "redirect:/vendedores";
+    }
+
+    @GetMapping("/vendedor/eliminar")
+    public String eliminarVendedor(@RequestParam("id") Integer id) {
+        try {
+            vendendorService.eliminarVendedor(id);
+        } catch (ClavesForaneasException ex) {
+            return "error-claves-foraneas";
+        }
+        return "redirect:/vendedores"; 
+    }
+
+    @GetMapping("/vendedor/buscar")
+    public String mostrarFormularioDeBusqueda() {
+        return "vendedor-buscar"; 
+    }
+
+    @PostMapping("/vendedor/buscar")
+    public String buscarVendedor(@RequestParam("id") Integer id, Model model) {
+        Vendedor vendedor = vendendorService.buscarVendedorPorId(id);
+        model.addAttribute("vendedor", vendedor);
+        return vendedor != null ? "vendedor-detalle" : "redirect:/vendedor/buscar";
+    }
+}
