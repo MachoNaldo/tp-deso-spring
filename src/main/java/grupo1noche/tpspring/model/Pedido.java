@@ -31,7 +31,3 @@ public class Pedido {
 
 
 }
-private enum Estado {
-    PENDIENTE,
-    EN_ENVIO,
-}
