@@ -1,0 +1,41 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class PagoController {
+
+    private final PagoService pagoService;
+
+    @Autowired
+    public PagoController(PagoService pagoService) {
+        this.pagoService = pagoService;
+    }
+
+    @GetMapping("/crear")
+    public String crearPagoForm(Model model) {
+        model.addAttribute("pago", new Pago());
+        return "pago-crear";
+    }
+
+    @PostMapping("/pago/registrar")
+    public String registrarPago(Pago pago) {
+        pagoService.guardarPago(pago); // Llamada al servicio para guardar el pago
+        return "redirect:/"; // Redirige al menu principal despues de registrar el pago
+    }
+
+    @GetMapping("/pago/buscar")
+    public String mostrarFormularioDeBusqueda() {
+        return "pago-buscar";
+    }
+
+    @PostMapping("/pago/buscar")
+    public String buscarPago(@RequestParam("id") Integer id, Model model) {
+        Pago pago = pagoService.buscarPagoPorId(id); // Busca el pago por id
+        model.addAttribute("pago", pago);
+        return pago != null ? "pago-detalle" : "redirect:/pago/buscar"; // Muestra detalle o redirige a la busqueda
+    }
+}
