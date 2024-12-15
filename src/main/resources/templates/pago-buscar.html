@@ -33,23 +33,31 @@
       <!-- Mostrar los resultados de la búsqueda -->
       <div th:if="${not #lists.isEmpty(pagos)}" class="mt-6">
         <h2 class="text-xl font-bold mb-4">Resultados de la Búsqueda</h2>
-        <ul>
-          <li th:each="pago : ${pagos}" class="mb-4 p-4 border-b">
-            <p th:text="'Cliente: ' + ${pago.cliente}"></p>
-            <p th:text="'Vendedor: ' + ${pago.vendedor}"></p>
-            <p th:text="'Total: ' + ${pago.total}"></p>
-          </li>
-        </ul>
+        <table class="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-6 py-3 text-left">Cliente</th>
+              <th class="px-6 py-3 text-left">Vendedor</th>
+              <th class="px-6 py-3 text-left">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="pago : ${pagos}" class="border-t">
+              <td class="px-6 py-3" th:text="${pago.cliente}"></td>
+              <td class="px-6 py-3" th:text="${pago.vendedor}"></td>
+              <td class="px-6 py-3" th:text="${pago.total}"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
       <!-- Si no hay resultados -->
       <div th:if="${#lists.isEmpty(pagos)}" class="mt-6">
         <p>No se encontraron pagos que coincidan con la búsqueda.</p>
       </div>
 
       <div class="mt-6">
-        <a href="/" class="text-blue-500 hover:underline"
-          >Volver al menú principal</a
-        >
+        <a href="/" class="text-blue-500 hover:underline">Volver al menú principal</a>
       </div>
     </div>
   </body>

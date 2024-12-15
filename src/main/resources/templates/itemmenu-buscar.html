@@ -11,7 +11,7 @@
         <!-- Campo select para elegir el criterio de búsqueda -->
         <select name="criterio" class="text-gray-800 border rounded py-2 px-3">
           <option value="nombre">Nombre</option>
-          <option value="cuit">Categoria</option>
+          <option value="categoria">Categoria</option>
         </select>
         <!-- Campo de búsqueda -->
         <input
@@ -33,23 +33,31 @@
       <!-- Mostrar los resultados de la búsqueda -->
       <div th:if="${not #lists.isEmpty(itemsmenu)}" class="mt-6">
         <h2 class="text-xl font-bold mb-4">Resultados de la Búsqueda</h2>
-        <ul>
-          <li th:each="itemmenu : ${itemsmenu}" class="mb-4 p-4 border-b">
-            <p th:text="'Nombre: ' + ${itemmenu.nombre}"></p>
-            <p th:text="'Precio: ' + ${itemmenu.precio}"></p>
-            <p th:text="'Categoria: ' + ${itemmenu.categoria}"></p>
-          </li>
-        </ul>
+        <table class="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-6 py-3 text-left">Nombre</th>
+              <th class="px-6 py-3 text-left">Precio</th>
+              <th class="px-6 py-3 text-left">Categoria</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="itemmenu : ${itemsmenu}" class="border-t">
+              <td class="px-6 py-3" th:text="${itemmenu.nombre}"></td>
+              <td class="px-6 py-3" th:text="${itemmenu.precio}"></td>
+              <td class="px-6 py-3" th:text="${itemmenu.categoria}"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
       <!-- Si no hay resultados -->
       <div th:if="${#lists.isEmpty(itemsmenu)}" class="mt-6">
         <p>No se encontraron items que coincidan con la búsqueda.</p>
       </div>
 
       <div class="mt-6">
-        <a href="/" class="text-blue-500 hover:underline"
-          >Volver al menú principal</a
-        >
+        <a href="/" class="text-blue-500 hover:underline">Volver al menú principal</a>
       </div>
     </div>
   </body>

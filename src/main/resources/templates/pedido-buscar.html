@@ -33,13 +33,22 @@
       <!-- Mostrar los resultados de la búsqueda -->
       <div th:if="${not #lists.isEmpty(pedidos)}" class="mt-6">
         <h2 class="text-xl font-bold mb-4">Resultados de la Búsqueda</h2>
-        <ul>
-          <li th:each="pedido : ${pedidos}" class="mb-4 p-4 border-b">
-            <p th:text="'Cliente: ' + ${pedido.cliente}"></p>
-            <p th:text="'Estado: ' + ${pedido.estado}"></p>
-            <p th:text="'Total: ' + ${pedido.total}"></p>
-          </li>
-        </ul>
+        <table class="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-6 py-3 text-left">Cliente</th>
+              <th class="px-6 py-3 text-left">Estado</th>
+              <th class="px-6 py-3 text-left">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="pedido : ${pedidos}" class="border-t">
+              <td class="px-6 py-3" th:text="${pedido.cliente}"></td>
+              <td class="px-6 py-3" th:text="${pedido.estado}"></td>
+              <td class="px-6 py-3" th:text="${pedido.total}"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- Si no hay resultados -->
@@ -48,9 +57,7 @@
       </div>
 
       <div class="mt-6">
-        <a href="/" class="text-blue-500 hover:underline"
-          >Volver al menú principal</a
-        >
+        <a href="/" class="text-blue-500 hover:underline">Volver al menú principal</a>
       </div>
     </div>
   </body>

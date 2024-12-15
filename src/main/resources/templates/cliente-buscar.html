@@ -35,24 +35,33 @@
       <!-- Mostrar los resultados de la búsqueda -->
       <div th:if="${not #lists.isEmpty(clientes)}" class="mt-6">
         <h2 class="text-xl font-bold mb-4">Resultados de la Búsqueda</h2>
-        <ul>
-          <li th:each="cliente : ${clientes}" class="mb-4 p-4 border-b">
-            <p th:text="'Nombre: ' + ${cliente.nombre}"></p>
-            <p th:text="'Cuit: ' + ${cliente.cuit}"></p>
-            <p th:text="'Email: ' + ${cliente.email}"></p>
-            <p th:text="'Direccion: ' + ${cliente.direccion}"></p>
-          </li>
-        </ul>
+        <table class="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-6 py-3 text-left">Nombre</th>
+              <th class="px-6 py-3 text-left">Cuit</th>
+              <th class="px-6 py-3 text-left">Email</th>
+              <th class="px-6 py-3 text-left">Dirección</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="cliente : ${clientes}" class="border-t">
+              <td class="px-6 py-3" th:text="${cliente.nombre}"></td>
+              <td class="px-6 py-3" th:text="${cliente.cuit}"></td>
+              <td class="px-6 py-3" th:text="${cliente.email}"></td>
+              <td class="px-6 py-3" th:text="${cliente.direccion}"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- Si no hay resultados -->
       <div th:if="${#lists.isEmpty(clientes)}" class="mt-6">
         <p>No se encontraron clientes que coincidan con la búsqueda.</p>
       </div>
+
       <div class="mt-6">
-        <a href="/" class="text-blue-500 hover:underline"
-          >Volver al menú principal</a
-        >
+        <a href="/" class="text-blue-500 hover:underline">Volver al menú principal</a>
       </div>
     </div>
   </body>
