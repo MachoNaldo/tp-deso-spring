@@ -1,0 +1,47 @@
+package grupo1noche.tpspring.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import grupo1noche.tpspring.model.ItemMenu;
+import grupo1noche.tpspring.service.ItemMenuService;
+
+@Controller
+@RequestMapping("/items-menu")
+public class ItemMenuController {
+
+    @Autowired
+    private ItemMenuService itemMenuService;
+
+    @GetMapping("/crear")
+    public String mostrarFormularioCrear(Model model) {
+        model.addAttribute("itemMenu", new ItemMenu());
+        return "itemmenu-crear";
+    }
+
+    @PostMapping("/crear")
+    public String crearItemMenu(@ModelAttribute ItemMenu itemMenu) {
+        itemMenuService.crearItemMenu(itemMenu);
+        return "redirect:/items-menu";
+    }
+
+    @GetMapping("/buscar")
+    public String mostrarFormularioBuscar() {
+        return "itemmenu-buscar";
+    }
+
+    @GetMapping("/{id}/editar")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        ItemMenu itemMenu = itemMenuService.buscarItemMenu(id);
+        model.addAttribute("itemMenu", itemMenu);
+        return "itemmenu-editar";
+    }
+
+    @PostMapping("/{id}/editar")
+    public String editarItemMenu(@ModelAttribute ItemMenu itemMenu) {
+        itemMenuService.crearItemMenu(itemMenu); // Reutiliza para guardar cambios
+        return "redirect:/items-menu";
+    }
+}

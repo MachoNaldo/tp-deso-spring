@@ -1,0 +1,47 @@
+package grupo1noche.tpspring.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import grupo1noche.tpspring.model.Pago;
+import grupo1noche.tpspring.service.PagoService;
+
+@Controller
+@RequestMapping("/pagos")
+public class PagoController {
+
+    @Autowired
+    private PagoService pagoService;
+
+    @GetMapping("/crear")
+    public String mostrarFormularioCrear(Model model) {
+        model.addAttribute("pago", new Pago());
+        return "pago-crear";
+    }
+
+    @PostMapping("/crear")
+    public String crearPago(@ModelAttribute Pago pago) {
+        pagoService.crearPago(pago);
+        return "redirect:/pagos";
+    }
+
+    @GetMapping("/buscar")
+    public String mostrarFormularioBuscar() {
+        return "pago-buscar";
+    }
+
+    @GetMapping("/{id}/editar")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        Pago pago = pagoService.buscarPago(id);
+        model.addAttribute("pago", pago);
+        return "pago-editar";
+    }
+
+    @PostMapping("/{id}/editar")
+    public String editarPago(@ModelAttribute Pago pago) {
+        pagoService.crearPago(pago); // Se reutiliza `crearPago` para guardar cambios
+        return "redirect:/pagos";
+    }
+}
