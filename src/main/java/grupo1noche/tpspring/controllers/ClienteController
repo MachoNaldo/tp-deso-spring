@@ -1,53 +1,34 @@
+package grupo1noche.tpspring.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import grupo1noche.tpspring.model.Cliente;
+import grupo1noche.tpspring.service.ClienteService;
 
-@RestController
-@RequestMapping("/cliente")
+@Controller
+@RequestMapping("/clientes")
 public class ClienteController {
 
-    private final ClienteService clienteService;
-
     @Autowired
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
-    }
+    private ClienteService clienteService;
 
-    @GetMapping("/listar")
-    public List<Cliente> listarClientes() {
-        return clienteService.listarClientes();
+    @GetMapping("/crear")
+    public String mostrarFormularioCrear(Model model) {
+        model.addAttribute("cliente", new Cliente());
+        return "cliente-crear";
     }
 
     @PostMapping("/crear")
-    public String crearCliente(Cliente cliente) {
+    public String crearCliente(@ModelAttribute Cliente cliente) {
         clienteService.crearCliente(cliente);
-        return "Cliente creado correctamente";
-    }
-
-    @PostMapping("/actualizar")
-    public String actualizarCliente(Cliente cliente) {
-        clienteService.actualizarCliente(cliente);
-        return "Cliente actualizado correctamente";
-    }
-
-    @PostMapping("/eliminar")
-    public String eliminarCliente(@RequestParam("id") int id) {
-        try {
-            clienteService.eliminarCliente(id);
-            return "Cliente eliminado correctamente";
-        } catch (ClavesForaneasException ex) {
-            return "Error al eliminar el cliente: " + ex.getMessage();
-        }
+        return "redirect:/clientes";
     }
 
     @GetMapping("/buscar")
-    public Cliente buscarCliente(@RequestParam("id") int id) {
-        return clienteService.buscarCliente(id);
+    public String mostrarFormularioBuscar() {
+        return "cliente-buscar";
     }
 }

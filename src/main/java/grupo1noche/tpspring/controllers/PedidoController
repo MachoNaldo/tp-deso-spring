@@ -1,52 +1,47 @@
+package grupo1noche.tpspring.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import grupo1noche.tpspring.model.Pedido;
+import grupo1noche.tpspring.service.PedidoService;
 
-@RestController
-@RequestMapping("/pedido")
+@Controller
+@RequestMapping("/pedidos")
 public class PedidoController {
 
-    private final PedidoService pedidoService;
-    private final PagoController pagoController;
-
     @Autowired
-    public PedidoController(PedidoService pedidoService, PagoController pagoController) {
-        this.pedidoService = pedidoService;
-        this.pagoController = pagoController;
-    }
+    private PedidoService pedidoService;
 
-    @GetMapping("/listar")
-    public List<Pedido> listarPedidos() {
-        return pedidoService.listarPedidos();
+    @GetMapping("/crear")
+    public String mostrarFormularioCrear(Model model) {
+        model.addAttribute("pedido", new Pedido());
+        return "pedido-crear";
     }
 
     @PostMapping("/crear")
-    public String crearPedido(@RequestParam("clienteId") int clienteId) {
-        pedidoService.crearNuevoPedido(clienteId);
-        return "Pedido creado correctamente";
-    }
-
-    @PostMapping("/modificar")
-    public String modificarPedido(@RequestParam("id") int id,
-                                  @RequestParam("clienteId") int clienteId,
-                                  @RequestParam("estado") String estado) {
-        pedidoService.modificarPedido(id, clienteId, Estado.valueOf(estado));
-        return "Pedido modificado correctamente";
-    }
-
-    @PostMapping("/eliminar")
-    public String eliminarPedido(@RequestParam("id") int id) {
-        boolean result = pedidoService.eliminarPedido(id);
-        return result ? "Pedido eliminado correctamente" : "Error al eliminar el pedido";
+    public String crearPedido(@ModelAttribute Pedido pedido) {
+        pedidoService.crearPedido(pedido);
+        return "redirect:/pedidos";
     }
 
     @GetMapping("/buscar")
-    public Pedido buscarPedido(@RequestParam("id") int id) {
-        return pedidoService.buscarPedido(id);
+    public String mostrarFormularioBuscar() {
+        return "pedido-buscar";
+    }
+
+    @GetMapping("/{id}/editar")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        Pedido pedido = pedidoService.buscarPedido(id);
+        model.addAttribute("pedido", pedido);
+        return "pedido-editar";
+    }
+
+    @PostMapping("/{id}/editar")
+    public String editarPedido(@ModelAttribute Pedido pedido) {
+        pedidoService.crearPedido(pedido); // Reutiliza para guardar cambios
+        return "redirect:/pedidos";
     }
 }

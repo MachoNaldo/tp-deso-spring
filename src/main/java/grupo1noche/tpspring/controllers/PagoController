@@ -1,43 +1,47 @@
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.ui.Model;
+package grupo1noche.tpspring.controller;
 
-@RestController
-@RequestMapping("/pago")
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import grupo1noche.tpspring.model.Pago;
+import grupo1noche.tpspring.service.PagoService;
+
+@Controller
+@RequestMapping("/pagos")
 public class PagoController {
 
-    private final PagoService pagoService;
-
     @Autowired
-    public PagoController(PagoService pagoService) {
-        this.pagoService = pagoService;
-    }
+    private PagoService pagoService;
 
     @GetMapping("/crear")
-    public String crearPagoForm(Model model) {
+    public String mostrarFormularioCrear(Model model) {
         model.addAttribute("pago", new Pago());
         return "pago-crear";
     }
 
-    @PostMapping("/registrar")
-    public String registrarPago(Pago pago) {
-        pagoService.guardarPago(pago); // Llamada al servicio para guardar el pago
-        return "redirect:/"; // Redirige al menu principal despues de registrar el pago
+    @PostMapping("/crear")
+    public String crearPago(@ModelAttribute Pago pago) {
+        pagoService.crearPago(pago);
+        return "redirect:/pagos";
     }
 
     @GetMapping("/buscar")
-    public String mostrarFormularioDeBusqueda() {
+    public String mostrarFormularioBuscar() {
         return "pago-buscar";
     }
 
-    @PostMapping("/buscar")
-    public String buscarPago(@RequestParam("id") Integer id, Model model) {
-        Pago pago = pagoService.buscarPagoPorId(id); // Busca el pago por id
+    @GetMapping("/{id}/editar")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        Pago pago = pagoService.buscarPago(id);
         model.addAttribute("pago", pago);
-        return pago != null ? "pago-detalle" : "redirect:/pago/buscar"; // Muestra detalle o redirige a la busqueda
+        return "pago-editar";
+    }
+
+    @PostMapping("/{id}/editar")
+    public String editarPago(@ModelAttribute Pago pago) {
+        pagoService.crearPago(pago); // Se reutiliza `crearPago` para guardar cambios
+        return "redirect:/pagos";
     }
 }
