@@ -11,7 +11,7 @@ public class MainController {
     public String mostrarMenuPrincipal(Model model) {
         return "index"; // Retorna el nombre de la vista (por ejemplo, una página HTML)
     }
-/* 
+
     // Ruta para la página de "ItemMenu"
     @GetMapping("/itemmenu")
     public String mostrarItemMenu(Model model) {
@@ -40,5 +40,5 @@ public class MainController {
     @GetMapping("/vendedor")
     public String mostrarVendedor(Model model) {
         return "vendedor"; // Nombre de la vista correspondiente
-    }*/
+    }
 }
