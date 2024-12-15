@@ -7,21 +7,26 @@ import jakarta.persistence.*;
 @Data
 @AllArgsConstructor
 
-@MappedSuperclass
-@Entity(name = "itemMenu")
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "itemMenu")
 
 public abstract class ItemMenu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idMenu;
+    private long idItem;
     @Column(name = "item")
     private String nombreItem;
     @Column(name = "precio")
     private Integer precio;
-    @Column(name = "categoria")
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
-    @Column(name = "vendedor")
+
+    @ManyToOne
+    @JoinColumn(name = "vendedor_id")
     private Vendedor vendedor;
 
     public abstract double peso();

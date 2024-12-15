@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Vendedor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto py-10">
+        <h1 class="text-2xl font-bold mb-4">Editar Vendedor</h1>
+        <form th:action="@{/vendedor/editar/{id}(id=${vendedor.id})}" method="post">
+            <div class="mb-4">
+                <label for="nombreVendedor" class="block text-sm font-medium">Nombre:</label>
+                <input type="text" id="nombreVendedor" name="nombreVendedor" th:value="${vendedor.nombreVendedor}"
+                       class="border rounded w-full py-2 px-3" required>
+            </div>
+            <div class="mb-4">
+                <label for="telefono" class="block text-sm font-medium">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" th:value="${vendedor.telefono}"
+                       class="border rounded w-full py-2 px-3" required>
+            </div>
+            <div class="mb-4">
+                <label for="direccionVendedor" class="block text-sm font-medium">Dirección:</label>
+                <input type="text" id="direccionVendedor" name="direccionVendedor" th:value="${vendedor.direccionVendedor}"
+                       class="border rounded w-full py-2 px-3" required>
+            </div>
+            <div class="mb-4">
+                <label for="categoria" class="block text-sm font-medium">Categoría:</label>
+                <input type="text" id="categoria" name="categoria" th:value="${vendedor.categoria}"
+                       class="border rounded w-full py-2 px-3" required>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Guardar Cambios</button>
+        </form>
+        <div class="mt-6">
+            <a href="/vendedor/buscar" class="text-blue-500 hover:underline">Cancelar</a>
+        </div>
+    </div>
+</body>
+</html>

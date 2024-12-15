@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Registrar Vendedor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto py-10">
+      <h1 class="text-2xl font-bold mb-4">Registrar Vendedor</h1>
+      <form action="/vendedor/registrar" method="post">
+        <div class="mb-4">
+          <label for="nombreVendedor" class="block text-sm font-medium"
+            >Nombre Vendedor:</label
+          >
+          <input
+            type="text"
+            id="nombreVendedor"
+            name="nombreVendedor"
+            class="border rounded w-full py-2 px-3"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="telefono" class="block text-sm font-medium"
+            >Teléfono:</label
+          >
+          <input
+            type="text"
+            id="telefono"
+            name="telefono"
+            class="border rounded w-full py-2 px-3"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="direccionVendedor" class="block text-sm font-medium"
+            >Dirección:</label
+          >
+          <input
+            type="text"
+            id="direccionVendedor"
+            name="direccionVendedor"
+            class="border rounded w-full py-2 px-3"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="categoria" class="block text-sm font-medium"
+            >Categoría:</label
+          >
+          <input
+            type="text"
+            id="categoria"
+            name="categoria"
+            class="border rounded w-full py-2 px-3"
+            required
+          />
+        </div>
+
+        <!-- Lista dinámica de ItemsMenu -->
+        <div id="itemsMenuContainer" class="mb-4">
+          <h2 class="text-xl font-semibold mb-2">Items del Menú</h2>
+          <div class="itemMenu mb-2 flex items-center space-x-4">
+            <div class="w-full">
+              <label for="itemsMenu[0].nombre" class="block text-sm"
+                >Nombre del ítem:</label
+              >
+              <input
+                type="text"
+                name="itemsMenu[0].nombre"
+                class="border rounded w-full py-2 px-3"
+                required
+              />
+
+              <label for="itemsMenu[0].precio" class="block text-sm"
+                >Precio:</label
+              >
+              <input
+                type="number"
+                name="itemsMenu[0].precio"
+                class="border rounded w-full py-2 px-3"
+                step="0.01"
+                required
+              />
+            </div>
+            <button
+              type="button"
+              class="removeItem bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+        <button
+          type="button"
+          id="addItem"
+          class="bg-gray-500 text-white py-2 px-4 rounded mb-4"
+        >
+          Agregar ítem
+        </button>
+
+        <button
+          type="submit"
+          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          Registrar
+        </button>
+      </form>
+      <div class="mt-6">
+        <a href="/" class="text-blue-500 hover:underline"
+          >Volver al menú principal</a
+        >
+      </div>
+    </div>
+
+    <script>
+      // Script para agregar y eliminar dinámicamente ítems del formulario
+      let itemIndex = 1;
+
+      document.getElementById("addItem").addEventListener("click", function () {
+        const container = document.getElementById("itemsMenuContainer");
+        const div = document.createElement("div");
+        div.classList.add(
+          "itemMenu",
+          "mb-2",
+          "flex",
+          "items-center",
+          "space-x-4"
+        );
+        div.innerHTML = `
+                <div class="w-full">
+                    <label for="itemsMenu[${itemIndex}].nombre" class="block text-sm">Nombre del ítem:</label>
+                    <input type="text" name="itemsMenu[${itemIndex}].nombre" class="border rounded w-full py-2 px-3" required>
+
+                    <label for="itemsMenu[${itemIndex}].precio" class="block text-sm">Precio:</label>
+                    <input type="number" name="itemsMenu[${itemIndex}].precio" class="border rounded w-full py-2 px-3" step="0.01" required>
+                </div>
+                <button type="button" class="removeItem bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Eliminar</button>
+            `;
+        container.appendChild(div);
+        itemIndex++;
+      });
+
+      document
+        .getElementById("itemsMenuContainer")
+        .addEventListener("click", function (e) {
+          if (e.target && e.target.classList.contains("removeItem")) {
+            e.target.parentElement.remove();
+          }
+        });
+    </script>
+  </body>
+</html>

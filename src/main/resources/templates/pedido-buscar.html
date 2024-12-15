@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Buscar Pedido</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="dark:bg-gray-800 text-gray-100 font-mono">
+    <div class="container mx-auto py-10">
+      <h1 class="text-2xl font-bold mb-4">Buscar Pedido</h1>
+      <form action="/pedido/buscar" method="get" class="flex space-x-4">
+        <!-- Campo select para elegir el criterio de búsqueda -->
+        <select name="criterio" class="text-gray-800 border rounded py-2 px-3">
+          <option value="nombreCliente">Nombre Cliente</option>
+          <option value="estadoPedido">Estado</option>
+        </select>
+        <!-- Campo de búsqueda -->
+        <input
+          type="text"
+          name="busqueda"
+          placeholder="Buscar por nombre del Cliente o estado del Pedido"
+          class="text-gray-800 border rounded w-full py-2 px-3"
+          required
+        />
+
+        <button
+          type="submit"
+          class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+        >
+          Buscar
+        </button>
+      </form>
+
+      <!-- Mostrar los resultados de la búsqueda -->
+      <div th:if="${not #lists.isEmpty(pedidos)}" class="mt-6">
+        <h2 class="text-xl font-bold mb-4">Resultados de la Búsqueda</h2>
+        <ul>
+          <li th:each="pedido : ${pedidos}" class="mb-4 p-4 border-b">
+            <p th:text="'Cliente: ' + ${pedido.cliente}"></p>
+            <p th:text="'Estado: ' + ${pedido.estado}"></p>
+            <p th:text="'Total: ' + ${pedido.total}"></p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Si no hay resultados -->
+      <div th:if="${#lists.isEmpty(pedidos)}" class="mt-6">
+        <p>No se encontraron pedidos que coincidan con la búsqueda.</p>
+      </div>
+
+      <div class="mt-6">
+        <a href="/" class="text-blue-500 hover:underline"
+          >Volver al menú principal</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

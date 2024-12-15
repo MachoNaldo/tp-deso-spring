@@ -1,5 +1,8 @@
 package grupo1noche.tpspring.model;
 
+import jakarta.persistence.*;
+
+@DiscriminatorValue("TARJETA")
 
 public class PagoTransferencia extends Pago {
 

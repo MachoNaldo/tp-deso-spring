@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 
-
+@Entity
 @Table(name = "bebida")
 
 public class Bebida extends ItemMenu {
@@ -21,7 +21,7 @@ public class Bebida extends ItemMenu {
     private boolean esGaseosa;
     
 
-    public Bebida(int id, String nombre,int precio, Categoria categoria,Vendedor vendedor, double volumenEnMl, boolean esConAlcohol, boolean esGaseosa) {
+    public Bebida(Long id, String nombre,int precio, Categoria categoria,Vendedor vendedor, double volumenEnMl, boolean esConAlcohol, boolean esGaseosa) {
         super(id,nombre,precio,categoria,vendedor);
         this.volumenEnMl = volumenEnMl;
         this.esConAlcohol = esConAlcohol;

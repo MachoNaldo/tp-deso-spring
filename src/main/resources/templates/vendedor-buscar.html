@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Buscar Vendedor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="dark:bg-gray-800 text-gray-100 font-mono">
+    <div class="container mx-auto py-10">
+      <h1 class="text-2xl font-bold mb-4">Buscar Vendedor</h1>
+      <form action="/vendedor/buscar" method="get" class="flex space-x-4">
+        <!-- Campo select para elegir el criterio de búsqueda -->
+        <select name="criterio" class="text-gray-800 border rounded py-2 px-3">
+          <option value="nombre">Nombre</option>
+          <option value="telefono">Teléfono</option>
+        </select>
+
+        <!-- Campo de búsqueda -->
+        <input
+          type="text"
+          name="busqueda"
+          placeholder="Buscar por nombre o teléfono"
+          class="text-gray-800 border rounded w-full py-2 px-3"
+          required
+        />
+
+        <button
+          type="submit"
+          class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+        >
+          Buscar
+        </button>
+      </form>
+
+      <!-- Mostrar los resultados de la búsqueda -->
+      <div th:if="${not #lists.isEmpty(vendedores)}" class="mt-6">
+        <h2 class="text-xl font-bold mb-4">Resultados de la Búsqueda</h2>
+        <ul>
+          <li th:each="vendedor : ${vendedores}" class="mb-4 p-4 border-b">
+            <p th:text="'Nombre: ' + ${vendedor.nombreVendedor}"></p>
+            <p th:text="'Teléfono: ' + ${vendedor.telefono}"></p>
+            <p th:text="'Dirección: ' + ${vendedor.direccionVendedor}"></p>
+            <p th:text="'Categoría: ' + ${vendedor.categoria}"></p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Mensaje si no hay resultados -->
+      <div
+        th:if="${#lists.isEmpty(vendedores)} and ${criterio != null}"
+        class="mt-6"
+      >
+        <p>No se encontraron vendedores que coincidan con la búsqueda.</p>
+      </div>
+
+      <div class="mt-6">
+        <a href="/" class="text-blue-500 hover:underline"
+          >Volver al menú principal</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

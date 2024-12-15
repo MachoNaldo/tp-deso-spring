@@ -6,13 +6,14 @@ import jakarta.persistence.*;
 @Data
 @AllArgsConstructor
 
+@Entity
 @Table(name = "cliente")
 
 public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCliente;
+    private long idCliente;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "cuit")

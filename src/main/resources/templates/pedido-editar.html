@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Pedido</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto py-10">
+        <h1 class="text-2xl font-bold mb-4">Editar Pedido</h1>
+        <form th:action="@{/pedido/editar/{id}(id=${pedido.id})}" method="post">
+            <div class="mb-4">
+                <label for="clientePedido" class="block text-sm font-medium">Cliente:</label>
+                <input type="text" id="clientePedido" name="clientePedido" th:value="${pedido.clientePedido}"
+                       class="border rounded w-full py-2 px-3" required>
+            </div>
+            <div class="mb-4">
+                <label for="estadoPedido" class="block text-sm font-medium">Estado:</label>
+                <input type="text" id="estadoPedido" name="estadoPedido" th:value="${pedido.estadoPedido}"
+                       class="border rounded w-full py-2 px-3" required>
+            </div>
+            <div class="mb-4">
+                <label for="totalPedido" class="block text-sm font-medium">Total:</label>
+                <input type="text" id="totalPedido" name="totalPedido" th:value="${pedido.totalPedido}"
+                       class="border rounded w-full py-2 px-3" required>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Guardar Cambios</button>
+        </form>
+        <div class="mt-6">
+            <a href="/pedido/buscar" class="text-blue-500 hover:underline">Cancelar</a>
+        </div>
+    </div>
+</body>
+</html>
